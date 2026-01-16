@@ -1,0 +1,16 @@
+<div class="row">
+    @for (product of allAmazoneProducts; track $index) {
+    <div class="col-md-3 p-2">
+        <div class="card" style="width: 18rem;">
+            <img [src]="product.images" class="card-im-top" alt="..." />
+            <div class="card-body">
+                <h5 class="card-title"> {{product.title}} </h5>
+                <p class="card-text"> {{product.description | slice: 0:50}} </p>
+                <h6 class="card-category" style="display: inline-block;"> {{product.category | uppercase}} </h6>
+                <h3 class="card-price" style="display: inline-block; margin-left: 0.3cm; float: right; "> {{product.price | currency}} </h3> 
+            </div>
+        </div>
+    </div>
+}
+</div>
+
