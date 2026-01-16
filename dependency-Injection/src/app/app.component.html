@@ -1,0 +1,38 @@
+<app-navbar></app-navbar>
+<router-outlet></router-outlet>
+<app-footer></app-footer>
+
+
+
+
+
+
+
+
+<!-- ========== Compiler =================== -->
+
+<!-- Type of compilers in angular
+  - JIT : (Just-in-Time) : -v 8
+  - AOT : (Ahead-of-Time): -v 9
+-->
+
+<!--
+  Build time:
+  - TS => JS : by the TS-compiler
+  - Angular template: it could happen at build time (when working with AOT compiler)
+  - Bundling: Webpack
+  - Optimization: remove unused code and imports and so
+
+
+  Run Time:
+  - Angular template: it could happen at run time (when working with JIT compiler)
+-->
+
+<!--                |       AOT compiler              |     JIT compiler
+|------------------------------------------------------------------------
+|  Compilation:     |           Build time           |         RunTime
+|  Browser Load:    |           Faster               |         Slower
+|  Bundle Size:     |           Smaller              |         Larger
+|  Error Detection: |           Earlier (build time) |         Later
+
+-->
