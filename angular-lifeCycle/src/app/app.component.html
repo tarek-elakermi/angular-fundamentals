@@ -1,0 +1,12 @@
+<label>Change from parent:</label>
+<input [(ngModel)]="parentTerm">
+
+<button (click)="showChild = !showChild">
+  Toggle Child Component
+</button>
+
+<app-test-lifcycle-hook *ngIf="showChild" [term]="parentTerm">
+  <p #projected style="color: blue;">
+    Projected content
+  </p>
+</app-test-lifcycle-hook>
