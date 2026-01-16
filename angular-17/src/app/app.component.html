@@ -1,0 +1,333 @@
+<h1>Angular 16 directives</h1>
+
+<h1>Hello from root Component</h1>
+
+<p class="bg-danger">{{userName}}</p>
+<hr>
+<p>{{userEmail}}</p>
+<hr>
+<p>{{userPhone}}</p>
+<hr>
+<p>{{userAge}}</p>
+
+
+<!--
+    one way data binding :
+    - style binding
+    - class binding
+    - Event binding
+-->
+
+<br/>
+<!-- class binding-->
+ <p [class.active]="IsTrue" >user Email : {{userEmail}}</p>
+<br/>
+<!-- style binding-->
+ <p [style.color]="IsTrue? 'red' : 'green'"> user age {{userAge}}</p>
+<br/>
+<!-- Event binding binding-->
+ <button class="btn btn-black" (click)="log()"> click </button>
+ <input type="text" class="form-control" 
+ (keydown.control.c)="showAlert($event)"
+ (keypress)="log()">
+
+
+ <!--
+    Two way data binding :
+-->
+    <hr>
+    <input type="text" placeholder="search" [(ngModel)]="searchInput">
+
+    {{searchInput}}
+  
+    <br/>
+
+
+    <p>------------------------------------------------</p>
+    <h1>Directive</h1>
+
+    <!--
+    Directive :
+        Attribute Directive:
+            - ngClass
+            - ngStyle
+    --> 
+
+    <p [ngClass]=" { active: IsActive, 'bg-danger': IsTrue, 'text-center': 1 > 0} "> user name is: {{userName}}</p>
+    <p [ngClass]=" { 'bg-info': IsTrue || IsActive }"> user Email is: {{userEmail}}</p>
+
+    <hr>
+    <p 
+    [ngStyle]="
+    {
+        color : !IsActive ? 'red' : 'orange', 
+        background: !IsActive ? 'green' : 'black'
+    }"
+    > user Age is: {{userAge}}</p>
+
+
+     <p>------------------------------------------------</p>
+    <h1>Structer Directive</h1>
+
+    <!--
+    Directive :
+        Attribute Directive:
+            - *ngIf
+            - *ngSwitch
+            - *ngFor
+    -->
+<hr>
+
+    <p *ngIf="status || IsTrue "> User Name is : {{userName}}</p>
+
+    <div [ngSwitch]="userRole">
+        <p *ngSwitchCase="'admin'">Hello Admin</p>
+        <p *ngSwitchCase="'user'">Hello User</p>
+        <p *ngSwitchCase="'super'">Hello Super</p>
+        <p *ngSwitchDefault>Hello Man</p>
+    </div>
+
+    <hr>
+<div class="container">
+    <div class="row">
+        <ng-container *ngIf="products.length > 0; else empty">
+            <div  *ngFor="let product of products; let co = count; let o = odd; let e = even" class="col-md-4">
+                <div class="card" [ngClass]="{'bg-danger': o, 'bg-info': e}" >
+                    <p>count of item: {{co}}</p>
+                    <p>count of item: {{o}}</p>
+                    <p>count of item: {{e}}</p>
+                    <img [src]="product.img" class="card-img-top"alt="Card image cap" >
+                    <div class="card-body">
+                        <h5 class="card-title"> {{product.name}}</h5>
+                        <p class="card-text">{{product.price}}</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</div>
+
+<ng-template #empty>
+    <p class="bg-danger text-white text-center">No product to show </p>
+</ng-template>
+
+<hr>
+<br>
+<h1>Angular 17 directives</h1>
+<h2>Now in Angular 17 its called Control Flow</h2>
+<hr>
+<h2 class="bg-light text-center">Control Flow</h2>
+
+
+<!--
+    @if, @else
+-->
+@if (userRole === 'admin') {
+    <p>User role from if-else is: Admin</p>
+} @else if (userRole === 'user') {
+    <p>User role from if-else  is: User</p>
+} @else if (userRole === 'Tarek') {
+    <p>User role from if-else  is: Traek</p>
+} @else {
+    <p>User role from if-else  is: man</p>
+}
+
+<br>
+
+<!--
+@Switch
+-->
+
+@switch (userRole) {
+    @case ('admin') {
+    <p>User role from switch  is: Admin</p>
+
+    }
+    @case ('user') {
+    <p>User role from switch is: User</p>
+
+    }
+    @case ('Tarek') {
+    <p>User role from switch is: Traek</p>
+
+    }
+    @default {    
+    <p>User role from switch is: man</p>
+    }
+}
+
+
+<!--
+    @For
+-->
+<br>
+@for (friend of friends; track $index) {
+
+    <p>{{friend}}</p>
+}
+<hr>
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            @for (product of products; track $index) {
+
+                <div class="card" style="width: 18rem;">
+                    <p>{{$count}}</p>
+                    <p>{{$odd}}</p>
+                    <p>{{$even}}</p>
+                    <img class="card-img-top" [src]="product.img" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">{{product.name}}</h5>
+                        <p class="card-text">{{product.price}}</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+                } @empty {
+                    <p>No product to Show</p>
+                }
+                <button class="btn btn-danger" (click)="update()">update</button>
+
+        </div>
+    </div>
+</div>
+
+
+<!--
+    Passing data from parent to child
+-->
+@for (i of a; track $index) {
+    <hr>
+}
+
+<h2>Passing data from parent to child</h2>
+<h3 class="bg-danger">this msg is coming from parent component</h3>
+
+<app-child [getdfp]="userName"></app-child>
+<app-child></app-child>
+
+<!--
+    Passing data from child to parent
+-->
+@for (i of a; track $index) {
+    <hr>
+}
+
+<h2>Passing data from child to parent</h2>
+<app-child (shared)="getDataFromChild = $event"></app-child>
+
+<h2> {{getDataFromChild}} </h2>
+
+<!--
+    Content Projection
+-->
+
+@for (i of a; track $index) {
+    <hr>
+}
+
+<h2>Content Projection</h2>
+
+<app-contact>
+<app-about></app-about>
+</app-contact>
+
+
+<!--
+    Accesing elements from Dom: Child element @ViewChild
+-->
+
+<h2>Accesing elements from Dom</h2>
+
+<h3>Child element : {{'@ViewChild'}}</h3>
+
+<p #el class="bg-danger">hello 1</p>
+<hr>
+<app-contact #myComp></app-contact>
+
+
+<!--
+    Accesing Multiple elements from Dom: Child element @ViewChildren
+-->
+@for (i of a; track $index) {
+    <hr>
+}
+
+<h3>Child element : {{'@ViewChildren'}}</h3>
+<h4>from element ref and DOM html</h4>
+
+<!--
+    Accesing Multiple elements from Dom: Listening from ElementRef
+-->
+<p #all class="bg-primary p-3 m-1">hello from child 1</p>
+<p #all class="bg-primary p-3 m-1">hello from child 2</p>
+<p #all class="bg-primary p-3 m-1">hello from child 3</p>
+<p #all class="bg-primary p-3 m-1">hello from child 4</p>
+
+<!--
+    Accesing Multiple elements from Dom: Listening from the Component
+-->
+
+<hr>
+<h4>from Component itself</h4>
+
+<app-about #comp></app-about>
+<br>
+<app-contact #comp></app-contact>
+
+<!--
+    @ContentChild for Content Projection
+-->
+
+@for (i of a; track $index) {
+    <hr>
+}
+
+<h3>Content projection : {{'@ContentChild'}}</h3>
+<app-parent>
+<!-- <p #myp>this from content projection</p>-->
+<app-child1> 
+<app-grand-child></app-grand-child>  
+<!-- <p #fromChild1>Content projection from child</p> -->        
+</app-child1>
+
+</app-parent>
+
+
+<!--
+    @ContentChildren for Content Projection
+-->
+    <hr>
+    <hr>
+    <h3>Content projection : {{'@ContentChildren'}}</h3>
+
+    <app-parent>
+        <app-child1 #children>
+        </app-child1>
+        <app-grand-child #children></app-grand-child>
+    </app-parent>
+
+
+    @for (item of a; track $index) {
+        <hr>
+    }
+
+    <!--
+    Routing
+    -->
+
+    <h3>Routing</h3>
+    <router-outlet>
+    </router-outlet>
+
+
+
+
+
+
+
+
+
