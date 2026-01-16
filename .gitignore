@@ -1,0 +1,12 @@
+# Ignore node modules
+**/node_modules/
+
+# Ignore build output
+**/dist/
+
+# Angular cache
+**/.angular/
+
+# Optional OS files
+.DS_Store
+Thumbs.db
